@@ -6,14 +6,18 @@ const usersController = require('../controllers/user')
 
 router.route('/')
   .get(todolistsController.get)
+  .post(usersController.loginRequired,todolistsController.post)
 
-  router.route('/')
-  .post(todolistsController.post)
+router.route('/:id')
+  .delete(usersController.loginRequired,todolistsController.remove)
 
-  router.route('/')
-  .delete(todolistsController.remove)
+  router.route('/user/create')
+  .post(usersController.create)
 
-  router.route('/create/user')
-  .post(usersController.post)
+  router.route('/user/getall')
+  .get(usersController.getall)
+
+  router.route('/user/login')
+  .post(usersController.login)
 
 module.exports = router
