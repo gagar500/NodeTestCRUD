@@ -1,0 +1,24 @@
+{
+  "name": "pkap-backend-assignment",
+  "version": "1.0.0",
+  "description": "pkap core api",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "start-dev": "nodemon -L --watch . app.js",
+    "test": "NODE_ENV=test mocha -- tests/**/*.js app/**/tests/**/*.js"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "~1.17.2",
+    "cors": "^2.8.4",
+    "express": "~4.15.2",
+    "mongoose": "^4.11.3"
+  },
+  "devDependencies": {
+    "chai": "^4.1.0",
+    "mocha": "^3.4.0",
+    "nodemon": "^1.11.0",
+    "supertest": "^3.0.0"
+  }
+}
