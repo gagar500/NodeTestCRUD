@@ -1,8 +1,9 @@
 {
   "name": "pkap-backend-assignment",
-  "engineStrict" : true,
+
    "engines": {
-    "node": ">=8.2" 
+    "node": "8.2.1",
+    "npm":"5.3.0"
   },
   "version": "1.0.0",
   "description": "pkap core api",

@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 
 // Mongoose
 const database = (NODE_ENV !== 'test') ? 'pkap_todolists': 'pkap_test'
-const mongodbHost = process.env.MONGODB_URL || `127.0.0.1:27017/${database}`
+const mongodbHost = 'user:1234@ds055772.mlab.com:55772/pkap_todolists' || `127.0.0.1:27017/${database}`
 Mongoose.connect(`mongodb://${mongodbHost}`, {useMongoClient: true})
 
 //Authenticate
