@@ -41,7 +41,12 @@ async function loginRequired(req, res, next) {
 }
 
 async function getall(req,res,next){
-    const data = await Users.find().populate('_todoLists');
+    let data = await Users.find().populate('_todoLists')
+    
+    data = data.map((x)=>{
+        x.hashpassword = null
+        return x
+    })
     res.status(200).json(data)
 }
 
