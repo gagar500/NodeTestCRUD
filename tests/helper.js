@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 before(done => {
-	mongoose.connect('mongodb://localhost/pkap_test', {useMongoClient: true});
+	mongoose.connect('mongodb://127.0.0.1:27017/pkap_test', {useMongoClient: true});
 	mongoose.connection
 		.once('open', () => done())
 		.on('error', error => {
@@ -10,8 +10,10 @@ before(done => {
 });
 
 beforeEach(done => {
-	const { todolists} = mongoose.connection.collections;
+	const { todolists,users} = mongoose.connection.collections;
 	todolists.drop()
-		.then(() => done())
+		.then(() => users.drop().then(() => done())
+		.catch(() => done()))
 		.catch(() => done());
+
 });

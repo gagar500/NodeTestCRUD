@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "start-dev": "nodemon -L --watch . app.js",
-    "test": "NODE_ENV=test mocha -- tests/**/*.js app/**/tests/**/*.js"
+    "test": "mocha -- tests/**/*.js app/**/tests/**/*.js"
   },
   "license": "ISC",
   "dependencies": {
