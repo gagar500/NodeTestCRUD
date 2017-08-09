@@ -1,5 +1,6 @@
 {
   "name": "pkap-backend-assignment",
+  "engineStrict" : true,
    "engines": {
     "node": ">=8.2" 
   },
