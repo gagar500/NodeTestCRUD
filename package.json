@@ -1,5 +1,8 @@
 {
   "name": "pkap-backend-assignment",
+   "engines": {
+    "node": ">=8.2" 
+  },
   "version": "1.0.0",
   "description": "pkap core api",
   "main": "app.js",
@@ -8,7 +11,15 @@
     "start-dev": "nodemon -L --watch . app.js",
     "test": "mocha -- tests/**/*.js app/**/tests/**/*.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gagar500/NodeTestCRUD.git"
+  },
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gagar500/NodeTestCRUD/issues"
+  },
+  "homepage": "https://github.com/gagar500/NodeTestCRUD#readme",
   "dependencies": {
     "bcrypt": "^1.0.2",
     "body-parser": "~1.17.2",
