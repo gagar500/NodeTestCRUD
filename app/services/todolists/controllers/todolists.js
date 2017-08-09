@@ -12,6 +12,12 @@ async function post(req, res, next) {
     _user: req.user
   })
   const data = await newTask.save()
+
+  let user = await Users.findById(req.user._id)
+
+   user._todoLists.push(newTask);
+   await user.save();
+
   res.status(200).json({
     success: true,
     data: data

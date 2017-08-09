@@ -41,7 +41,7 @@ async function loginRequired(req, res, next) {
 }
 
 async function getall(req,res,next){
-    const data = await Users.find();
+    const data = await Users.find().populate('_todoLists');
     res.status(200).json(data)
 }
 
