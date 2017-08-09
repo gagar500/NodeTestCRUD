@@ -8,7 +8,7 @@ const Users = new Schema({
     hashpassword: { type: String, required: true },
     _todoLists: [{
         type: Schema.Types.ObjectId,
-        ref: 'TodoList'
+        ref: 'Todolist'
     }]
 })
 
