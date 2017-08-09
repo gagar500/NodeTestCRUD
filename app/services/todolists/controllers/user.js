@@ -12,19 +12,19 @@ async function create (req, res, next) {
 
   const data = await newUser.save();
   data.hashpassword = null
-  res.status(200).json(data)
+  res.status(200).json({success:true,data:data})
 
 }
 
 async function login(req, res, next) {
     const user = await Users.findOne({ username: req.body.username })
     if (!user) {
-        res.status(401).json({ message: 'User not found' });
+        res.status(401).json({success:false, msg: 'User not found' });
     } else {
         if (!user.comparePassword(req.body.password)) {
-            res.status(401).json({ message: 'wrong password' });
+            res.status(401).json({success:false, msg: 'wrong password' });
         } else {
-            return res.json({ token: Jwt.sign({ username: user.username, _id: user._id }, 'crudtest') });
+            return res.json({ success:true,token: Jwt.sign({ username: user.username, _id: user._id }, 'crudtest') });
         }
     }
 }
@@ -33,7 +33,7 @@ async function loginRequired(req, res, next) {
   if (req.user) {
     next();
   } else {
-    return res.status(401).json({ message: 'Unauthorized user' });
+    return res.status(401).json({  success:false,msg: 'Unauthorized user' });
   }
 }
 

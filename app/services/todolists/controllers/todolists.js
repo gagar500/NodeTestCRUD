@@ -3,7 +3,7 @@ const Users  = require('../models/users')
 
 async function get (req, res, next) {
   const data = await Todolists.find()
-  res.status(200).json({success:true,data:data})
+  res.status(200).json(data)
 }
 
 async function post (req, res, next) {
