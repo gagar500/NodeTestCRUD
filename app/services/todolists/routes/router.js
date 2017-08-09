@@ -10,6 +10,7 @@ router.route('/')
 
 router.route('/:id')
   .delete(usersController.loginRequired,todolistsController.remove)
+  .put(usersController.loginRequired,todolistsController.update)
 
   router.route('/user/create')
   .post(usersController.create)

@@ -229,3 +229,79 @@ describe('Remove task with login and the task belong to this user',function(){
   
   })
 })
+
+
+describe('update task with login but task is not belong to this user',function(){
+  it('should get fail status with task not found message',async()=>{  
+    
+    const data = [{username: 'admin',hashpassword:Bcrypt.hashSync('1234',10),name:'admin'},
+    {username: 'user',hashpassword:Bcrypt.hashSync('1234',10),name:'user'}]
+    const initData = await Promise.all(data.map(x => new Users(x).save()))    
+    const testUser = await Users.findOne({username:'admin'})
+    assert.equal(testUser.username,'admin')
+
+     const dataTask = [{text: 1,_user:testUser}, {text: 2,_user:testUser}]
+     const initDataTask = await Promise.all(dataTask.map(x => new Todolists(x).save()))
+     const task = await Todolists.findOne({text:1})
+
+    
+    const gatewayLogin = '/api/todolists/user/login'
+    let responseLogin = await request(app)
+     .post(gatewayLogin)
+     .send({username:'user',password:'1234'})
+     .set('Accept', 'application/json')
+
+     
+     const gateway = '/api/todolists/' + task.id
+     console.log(gateway)
+     let response = await request(app)
+     .put(gateway)
+     .set('Accept', 'application/json')
+     .set('authorization', 'JWT ' + responseLogin.body.token)
+     .expect(404)
+     
+  assert.equal(response.body.success,false)
+  assert.equal(response.body.msg,'task not found')
+  
+  })
+})
+
+
+
+describe('update task with login and the task belong to this user',function(){
+  it('should get success status',async()=>{  
+    
+    const data = [{username: 'admin',hashpassword:Bcrypt.hashSync('1234',10),name:'admin'},
+    {username: 'user',hashpassword:Bcrypt.hashSync('1234',10),name:'user'}]
+    const initData = await Promise.all(data.map(x => new Users(x).save()))    
+    const testUser = await Users.findOne({username:'admin'})
+    assert.equal(testUser.username,'admin')
+
+     const dataTask = [{text: 1,_user:testUser}, {text: 2,_user:testUser}]
+     const initDataTask = await Promise.all(dataTask.map(x => new Todolists(x).save()))
+     const task = await Todolists.findOne({text:1})
+
+    
+    const gatewayLogin = '/api/todolists/user/login'
+    let responseLogin = await request(app)
+     .post(gatewayLogin)
+     .send({username:'admin',password:'1234'})
+     .set('Accept', 'application/json')
+
+     
+     const gateway = '/api/todolists/' + task.id
+     console.log(gateway)
+     let response = await request(app)
+     .put(gateway)
+     .send({text:'test update'})
+     .set('Accept', 'application/json')
+     .set('authorization', 'JWT ' + responseLogin.body.token)
+     .expect(200)
+     
+  assert.equal(response.body.success,true)
+  assert.equal(response.body.msg,"update success")
+  assert.equal(response.body.data.text,'test update')
+
+  
+  })
+})
