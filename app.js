@@ -44,7 +44,7 @@ app.use(function (req, res, next) {
 app.use('/api', routes)
 
 // RUN
-const port = 3000
+const port = process.env.PORT ||3000
 const callback = () => console.log(`SERVER IS RUNNING AT PORT ${port}.`)
 app.listen(port, callback)
 
